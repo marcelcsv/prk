@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="StatusEditDlg" widgetVar="StatusEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{prkBundle.EditStatusTitle}" closeOnEscape="true">
+
+            <h:form id="StatusEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" columnClasses="column" rendered="#{statusController.selected != null}">
+
+
+                        <h:outputLabel value="#{prkBundle.EditStatusLabel_idStatus}" for="idStatus" />
+                        <h:panelGroup>
+                            <h:outputText id="idStatus" value="#{statusController.selected.idStatus}" />
+                            <p:tooltip for="idStatus" value="#{statusController.getComponentMessages('idStatus', prkBundle.EditStatusHelpText_idStatus)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{prkBundle.EditStatusLabel_nomeStatus}" for="nomeStatus" />
+                        <h:panelGroup>
+                            <p:inputText id="nomeStatus" value="#{statusController.selected.nomeStatus}" title="#{prkBundle.EditStatusTitle_nomeStatus}" size="100" maxlength="100"/>
+                            <p:tooltip for="nomeStatus" value="#{statusController.getComponentMessages('nomeStatus', prkBundle.EditStatusHelpText_nomeStatus)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{prkBundle.EditStatusLabel_descricaoStatus}" for="descricaoStatus" />
+                        <h:panelGroup>
+                            <p:inputText id="descricaoStatus" value="#{statusController.selected.descricaoStatus}" title="#{prkBundle.EditStatusTitle_descricaoStatus}" size="100" maxlength="100"/>
+                            <p:tooltip for="descricaoStatus" value="#{statusController.getComponentMessages('descricaoStatus', prkBundle.EditStatusHelpText_descricaoStatus)}"/>
+                        </h:panelGroup>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{statusController.save}" value="#{prkBundle.Save}" update="display,:StatusListForm:datalist,:StatusListForm:StatusDataTableContextMenu,:growl" oncomplete="handleSubmit(xhr,status,args,PF('StatusEditDialog'));">
+                        <p:confirm header="#{prkBundle.ConfirmationHeader}" message="#{prkBundle.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{prkBundle.Cancel}" oncomplete="PF('StatusEditDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

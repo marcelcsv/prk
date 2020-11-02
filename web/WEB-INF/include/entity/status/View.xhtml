@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="StatusViewDlg" widgetVar="StatusViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{prkBundle.ViewStatusTitle}" closeOnEscape="true">
+
+            <h:form id="StatusViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{statusController.selected != null}">
+
+                        <h:outputText value="#{prkBundle.ViewStatusLabel_idStatus}"/>
+                        <h:outputText value="#{statusController.selected.idStatus}" title="#{prkBundle.ViewStatusTitle_idStatus}"/>
+
+                        <h:outputText value="#{prkBundle.ViewStatusLabel_nomeStatus}"/>
+                        <h:outputText value="#{statusController.selected.nomeStatus}" title="#{prkBundle.ViewStatusTitle_nomeStatus}"/>
+
+                        <h:outputText value="#{prkBundle.ViewStatusLabel_descricaoStatus}"/>
+                        <h:outputText value="#{statusController.selected.descricaoStatus}" title="#{prkBundle.ViewStatusTitle_descricaoStatus}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{prkBundle.Close}" onclick="PF('StatusViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

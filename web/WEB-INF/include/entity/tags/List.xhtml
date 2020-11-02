@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="TagsListForm">
+
+        <p:panel header="#{prkBundle.ListTagsTitle}">
+            <p:contextMenu id="TagsDataTableContextMenu" for="datalist">  
+                <p:menuitem value="#{prkBundle.Create}" onclick="document.getElementById('TagsListForm:createButton').click();" icon="ui-icon-plus"/>
+                <p:menuitem value="#{prkBundle.View}" onclick="document.getElementById('TagsListForm:viewButton').click();" icon="ui-icon-search"/>
+                <p:menuitem value="#{prkBundle.Edit}" onclick="document.getElementById('TagsListForm:editButton').click();" icon="ui-icon-pencil"/>
+                <p:menuitem value="#{prkBundle.Delete}" onclick="document.getElementById('TagsListForm:deleteButton').click();" icon="ui-icon-trash"/>
+                <p:separator/>
+                <p:menuitem value="#{prkBundle.TagsMenuItem_ativa}" icon="ui-icon-search"  actionListener="#{tagsController.prepareAtiva}" update=":AtivaViewForm" oncomplete="PF('AtivaViewDialog').show()" disabled="#{empty tagsController.selected.ativa}"/>  
+                <p:menuitem value="#{prkBundle.TagsMenuItem_prefixo}" icon="ui-icon-search"  actionListener="#{tagsController.preparePrefixo}" update=":PrefixosViewForm" oncomplete="PF('PrefixosViewDialog').show()" disabled="#{empty tagsController.selected.prefixo}"/>  
+                <p:menuitem value="#{prkBundle.TagsMenuItem_status}" icon="ui-icon-search"  actionListener="#{tagsController.prepareStatus}" update=":StatusViewForm" oncomplete="PF('StatusViewDialog').show()" disabled="#{empty tagsController.selected.status}"/>  
+                <p:menuitem value="#{prkBundle.TagsMenuItem_matricula}" icon="ui-icon-search"  actionListener="#{tagsController.prepareMatricula}" update=":UorPosViewForm" oncomplete="PF('UorPosViewDialog').show()" disabled="#{empty tagsController.selected.matricula}"/>  
+                <p:menuitem value="#{prkBundle.TagsMenuItem_matriculaSolicitante}" icon="ui-icon-search"  actionListener="#{tagsController.prepareMatriculaSolicitante}" update=":UorPosViewForm" oncomplete="PF('UorPosViewDialog').show()" disabled="#{empty tagsController.selected.matriculaSolicitante}"/>  
+            </p:contextMenu>
+            <p:dataTable id="datalist"
+                         value="#{tagsController.items}"
+                         lazy="false"
+                         rowKey="#{item.tag}"
+                         var="item"
+                         paginator="true"
+                         rows="10"
+                         rowsPerPageTemplate="10,30,50"
+                         selectionMode="single"
+                         selection="#{tagsController.selected}"
+                         filteredValue="#{tagsController.filteredItems}">
+                <!--
+                         To enable Lazy Loading, please copy/replace the following lines above,
+                         and be sure to replace the word HASH with the # symbol:
+                
+                         value="HASH{tagsController.lazyItems}"
+                         lazy="true"
+                         rowKey="HASH{item.tag}"  <<< Remove this line
+                -->
+
+
+                <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:TagsDataTableContextMenu" listener="#{tagsController.resetParents}"/>
+                <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:TagsDataTableContextMenu" listener="#{tagsController.resetParents}"/>
+                <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton" listener="#{tagsController.resetParents}"/>
+                <p:ajax event="rowDblselect" onsuccess="document.getElementById('TagsListForm:viewButton').click();"/>
+
+                <p:column sortBy="#{item.tag}" filterBy="#{item.tag}">
+                    <f:facet name="header">
+                        <h:outputText value="#{prkBundle.ListTagsTitle_tag}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.tag}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.segundaVia}" filterBy="#{item.segundaVia}">
+                    <f:facet name="header">
+                        <h:outputText value="#{prkBundle.ListTagsTitle_segundaVia}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.segundaVia}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.acessoEstacionamento}" filterBy="#{item.acessoEstacionamento}">
+                    <f:facet name="header">
+                        <h:outputText value="#{prkBundle.ListTagsTitle_acessoEstacionamento}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.acessoEstacionamento}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.nome}" filterBy="#{item.nome}">
+                    <f:facet name="header">
+                        <h:outputText value="#{prkBundle.ListTagsTitle_nome}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.nome}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.situacao}" filterBy="#{item.situacao}">
+                    <f:facet name="header">
+                        <h:outputText value="#{prkBundle.ListTagsTitle_situacao}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.situacao}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.veiculo1}" filterBy="#{item.veiculo1}">
+                    <f:facet name="header">
+                        <h:outputText value="#{prkBundle.ListTagsTitle_veiculo1}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.veiculo1}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.veiculo2}" filterBy="#{item.veiculo2}">
+                    <f:facet name="header">
+                        <h:outputText value="#{prkBundle.ListTagsTitle_veiculo2}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.veiculo2}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.veiculo3}" filterBy="#{item.veiculo3}">
+                    <f:facet name="header">
+                        <h:outputText value="#{prkBundle.ListTagsTitle_veiculo3}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.veiculo3}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.UFComercial}" filterBy="#{item.UFComercial}">
+                    <f:facet name="header">
+                        <h:outputText value="#{prkBundle.ListTagsTitle_UFComercial}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.UFComercial}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.bairroComercial}" filterBy="#{item.bairroComercial}">
+                    <f:facet name="header">
+                        <h:outputText value="#{prkBundle.ListTagsTitle_bairroComercial}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.bairroComercial}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.logradouroComercial}" filterBy="#{item.logradouroComercial}">
+                    <f:facet name="header">
+                        <h:outputText value="#{prkBundle.ListTagsTitle_logradouroComercial}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.logradouroComercial}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.latitudeComercial}" filterBy="#{item.latitudeComercial}">
+                    <f:facet name="header">
+                        <h:outputText value="#{prkBundle.ListTagsTitle_latitudeComercial}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.latitudeComercial}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.longitudeComercial}" filterBy="#{item.longitudeComercial}">
+                    <f:facet name="header">
+                        <h:outputText value="#{prkBundle.ListTagsTitle_longitudeComercial}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.longitudeComercial}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.CEPComercial}" filterBy="#{item.CEPComercial}">
+                    <f:facet name="header">
+                        <h:outputText value="#{prkBundle.ListTagsTitle_CEPComercial}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.CEPComercial}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.UFResidencial}" filterBy="#{item.UFResidencial}">
+                    <f:facet name="header">
+                        <h:outputText value="#{prkBundle.ListTagsTitle_UFResidencial}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.UFResidencial}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.bairroResidencial}" filterBy="#{item.bairroResidencial}">
+                    <f:facet name="header">
+                        <h:outputText value="#{prkBundle.ListTagsTitle_bairroResidencial}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.bairroResidencial}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.logradouroResidencial}" filterBy="#{item.logradouroResidencial}">
+                    <f:facet name="header">
+                        <h:outputText value="#{prkBundle.ListTagsTitle_logradouroResidencial}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.logradouroResidencial}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.CEPResidencial}" filterBy="#{item.CEPResidencial}">
+                    <f:facet name="header">
+                        <h:outputText value="#{prkBundle.ListTagsTitle_CEPResidencial}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.CEPResidencial}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.latitudeResidencial}" filterBy="#{item.latitudeResidencial}">
+                    <f:facet name="header">
+                        <h:outputText value="#{prkBundle.ListTagsTitle_latitudeResidencial}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.latitudeResidencial}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.longitudeResidencial}" filterBy="#{item.longitudeResidencial}">
+                    <f:facet name="header">
+                        <h:outputText value="#{prkBundle.ListTagsTitle_longitudeResidencial}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.longitudeResidencial}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.distancia}" filterBy="#{item.distancia}">
+                    <f:facet name="header">
+                        <h:outputText value="#{prkBundle.ListTagsTitle_distancia}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.distancia}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.dataAtualizacao}" filterBy="#{item.dataAtualizacao}">
+                    <f:facet name="header">
+                        <h:outputText value="#{prkBundle.ListTagsTitle_dataAtualizacao}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.dataAtualizacao}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                </p:column>
+
+
+                <p:column sortBy="#{item.ativa.descricaoAtiva}" filterBy="#{item.ativa.descricaoAtiva}">
+                    <f:facet name="header">
+                        <h:outputText value="#{prkBundle.ListTagsTitle_ativa}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.ativa.descricaoAtiva}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.prefixo.prefixo}" filterBy="#{item.prefixo.prefixo}">
+                    <f:facet name="header">
+                        <h:outputText value="#{prkBundle.ListTagsTitle_prefixo}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.prefixo.prefixo}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.status.descricaoStatus}" filterBy="#{item.status.descricaoStatus}">
+                    <f:facet name="header">
+                        <h:outputText value="#{prkBundle.ListTagsTitle_status}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.status.descricaoStatus}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.matricula.matricula}" filterBy="#{item.matricula.matricula}">
+                    <f:facet name="header">
+                        <h:outputText value="#{prkBundle.ListTagsTitle_matricula}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.matricula.matricula}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.matriculaSolicitante.matricula}" filterBy="#{item.matriculaSolicitante.matricula}">
+                    <f:facet name="header">
+                        <h:outputText value="#{prkBundle.ListTagsTitle_matriculaSolicitante}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.matriculaSolicitante.matricula}"/>
+                </p:column>
+                
+                <p:column sortBy="#{item.valeTransporte}" filterBy="#{item.valeTransporte}">
+                    <f:facet name="header">
+                        <h:outputText value="#{prkBundle.ListTagsTitle_valeTransporte}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.valeTransporte}"/>
+                </p:column>
+
+
+            </p:dataTable>
+
+            <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{prkBundle.Create}" actionListener="#{tagsController.prepareCreate}" update=":TagsCreateForm" oncomplete="PF('TagsCreateDialog').show()"/>
+            <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{prkBundle.View}" update=":TagsViewForm" oncomplete="PF('TagsViewDialog').show()" disabled="#{empty tagsController.selected}"/>
+            <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{prkBundle.Edit}" update=":TagsEditForm" oncomplete="PF('TagsEditDialog').show()" disabled="#{empty tagsController.selected}"/>
+            <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{prkBundle.Delete}" actionListener="#{tagsController.delete}" update=":growl,datalist" disabled="#{empty tagsController.selected}">
+                <p:confirm header="#{prkBundle.ConfirmationHeader}" message="#{prkBundle.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+            </p:commandButton>
+
+        </p:panel>
+        <ui:include src="/WEB-INF/include/confirmation.xhtml"/>
+    </h:form>
+
+</ui:composition>

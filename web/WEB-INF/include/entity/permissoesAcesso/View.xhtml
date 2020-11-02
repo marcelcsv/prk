@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PermissoesAcessoViewDlg" widgetVar="PermissoesAcessoViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{prkBundle.ViewPermissoesAcessoTitle}" closeOnEscape="true">
+
+            <h:form id="PermissoesAcessoViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{permissoesAcessoController.selected != null}">
+
+                        <h:outputText value="#{prkBundle.ViewPermissoesAcessoLabel_idPermissaoAcesso}"/>
+                        <h:outputText value="#{permissoesAcessoController.selected.idPermissaoAcesso}" title="#{prkBundle.ViewPermissoesAcessoTitle_idPermissaoAcesso}"/>
+
+                        <h:outputText value="#{prkBundle.ViewPermissoesAcessoLabel_nomeAcesso}"/>
+                        <h:outputText value="#{permissoesAcessoController.selected.nomeAcesso}" title="#{prkBundle.ViewPermissoesAcessoTitle_nomeAcesso}"/>
+
+                        <h:outputText value="#{prkBundle.ViewPermissoesAcessoLabel_descricaoAcesso}"/>
+                        <h:outputText value="#{permissoesAcessoController.selected.descricaoAcesso}" title="#{prkBundle.ViewPermissoesAcessoTitle_descricaoAcesso}"/>
+
+                        <h:outputText value="#{prkBundle.ViewPermissoesAcessoLabel_siglaAcesso}"/>
+                        <h:outputText value="#{permissoesAcessoController.selected.siglaAcesso}" title="#{prkBundle.ViewPermissoesAcessoTitle_siglaAcesso}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{prkBundle.Close}" onclick="PF('PermissoesAcessoViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

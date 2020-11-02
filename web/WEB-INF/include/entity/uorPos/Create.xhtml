@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UorPosCreateDlg" widgetVar="UorPosCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{prkBundle.CreateUorPosTitle}" closeOnEscape="true">
+
+            <h:form id="UorPosCreateForm">
+
+                <h:panelGroup id="display" rendered="#{uorPosController.selected != null}">
+                    <p:panelGrid columns="2" columnClasses="column">
+
+                        <p:outputLabel value="#{prkBundle.CreateUorPosLabel_matricula}" for="matricula" />
+                        <h:panelGroup>
+                            <p:inputText id="matricula" value="#{uorPosController.selected.matricula}" title="#{prkBundle.CreateUorPosTitle_matricula}" required="true" requiredMessage="#{prkBundle.CreateUorPosRequiredMessage_matricula}" size="8" maxlength="8"/>
+                            <p:tooltip for="matricula" value="#{uorPosController.getComponentMessages('matricula', prkBundle.CreateUorPosHelpText_matricula)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{prkBundle.CreateUorPosLabel_nome}" for="nome" />
+                        <h:panelGroup>
+                            <p:inputText id="nome" value="#{uorPosController.selected.nome}" title="#{prkBundle.CreateUorPosTitle_nome}" size="200" maxlength="200"/>
+                            <p:tooltip for="nome" value="#{uorPosController.getComponentMessages('nome', prkBundle.CreateUorPosHelpText_nome)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{prkBundle.CreateUorPosLabel_nomeGuerra}" for="nomeGuerra" />
+                        <h:panelGroup>
+                            <p:inputText id="nomeGuerra" value="#{uorPosController.selected.nomeGuerra}" title="#{prkBundle.CreateUorPosTitle_nomeGuerra}" size="200" maxlength="200"/>
+                            <p:tooltip for="nomeGuerra" value="#{uorPosController.getComponentMessages('nomeGuerra', prkBundle.CreateUorPosHelpText_nomeGuerra)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{prkBundle.CreateUorPosLabel_codComissao}" for="codComissao" />
+                        <h:panelGroup>
+                            <p:inputText id="codComissao" value="#{uorPosController.selected.codComissao}" title="#{prkBundle.CreateUorPosTitle_codComissao}"/>
+                            <p:tooltip for="codComissao" value="#{uorPosController.getComponentMessages('codComissao', prkBundle.CreateUorPosHelpText_codComissao)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{prkBundle.CreateUorPosLabel_nomeComissao}" for="nomeComissao" />
+                        <h:panelGroup>
+                            <p:inputText id="nomeComissao" value="#{uorPosController.selected.nomeComissao}" title="#{prkBundle.CreateUorPosTitle_nomeComissao}" size="25" maxlength="25"/>
+                            <p:tooltip for="nomeComissao" value="#{uorPosController.getComponentMessages('nomeComissao', prkBundle.CreateUorPosHelpText_nomeComissao)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{prkBundle.CreateUorPosLabel_codNivel}" for="codNivel" />
+                        <h:panelGroup>
+                            <p:inputText id="codNivel" value="#{uorPosController.selected.codNivel}" title="#{prkBundle.CreateUorPosTitle_codNivel}" size="4" maxlength="4"/>
+                            <p:tooltip for="codNivel" value="#{uorPosController.getComponentMessages('codNivel', prkBundle.CreateUorPosHelpText_codNivel)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{prkBundle.CreateUorPosLabel_descNivel}" for="descNivel" />
+                        <h:panelGroup>
+                            <p:inputText id="descNivel" value="#{uorPosController.selected.descNivel}" title="#{prkBundle.CreateUorPosTitle_descNivel}" size="50" maxlength="50"/>
+                            <p:tooltip for="descNivel" value="#{uorPosController.getComponentMessages('descNivel', prkBundle.CreateUorPosHelpText_descNivel)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{prkBundle.CreateUorPosLabel_prefixo}" for="prefixo" />
+                        <h:panelGroup>
+                            <p:inputText id="prefixo" value="#{uorPosController.selected.prefixo}" title="#{prkBundle.CreateUorPosTitle_prefixo}"/>
+                            <p:tooltip for="prefixo" value="#{uorPosController.getComponentMessages('prefixo', prkBundle.CreateUorPosHelpText_prefixo)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{prkBundle.CreateUorPosLabel_UORpos}" for="UORpos" />
+                        <h:panelGroup>
+                            <p:inputText id="UORpos" value="#{uorPosController.selected.UORpos}" title="#{prkBundle.CreateUorPosTitle_UORpos}" required="true" requiredMessage="#{prkBundle.CreateUorPosRequiredMessage_UORpos}"/>
+                            <p:tooltip for="UORpos" value="#{uorPosController.getComponentMessages('UORpos', prkBundle.CreateUorPosHelpText_UORpos)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{prkBundle.CreateUorPosLabel_EMailFuncionario}" for="EMailFuncionario" />
+                        <h:panelGroup>
+                            <p:inputText id="EMailFuncionario" value="#{uorPosController.selected.EMailFuncionario}" title="#{prkBundle.CreateUorPosTitle_EMailFuncionario}" size="50" maxlength="50"/>
+                            <p:tooltip for="EMailFuncionario" value="#{uorPosController.getComponentMessages('EMailFuncionario', prkBundle.CreateUorPosHelpText_EMailFuncionario)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{prkBundle.CreateUorPosLabel_dataPermissaoAcesso}" for="dataPermissaoAcesso" />
+                        <h:panelGroup>
+                            <p:calendar id="dataPermissaoAcesso" pattern="MM/dd/yyyy HH:mm:ss" value="#{uorPosController.selected.dataPermissaoAcesso}" title="#{prkBundle.CreateUorPosTitle_dataPermissaoAcesso}"  showOn="button"/>
+                            <p:tooltip for="dataPermissaoAcesso" value="#{uorPosController.getComponentMessages('dataPermissaoAcesso', prkBundle.CreateUorPosHelpText_dataPermissaoAcesso)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{prkBundle.CreateUorPosLabel_dataAtualizacao}" for="dataAtualizacao" />
+                        <h:panelGroup>
+                            <p:calendar id="dataAtualizacao" pattern="MM/dd/yyyy HH:mm:ss" value="#{uorPosController.selected.dataAtualizacao}" title="#{prkBundle.CreateUorPosTitle_dataAtualizacao}"  showOn="button"/>
+                            <p:tooltip for="dataAtualizacao" value="#{uorPosController.getComponentMessages('dataAtualizacao', prkBundle.CreateUorPosHelpText_dataAtualizacao)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{prkBundle.CreateUorPosLabel_idPermissaoAcesso}" for="idPermissaoAcesso" />
+                        <h:panelGroup>
+                            <p:selectOneMenu id="idPermissaoAcesso" value="#{uorPosController.selected.idPermissaoAcesso}"  converter="permissoesAcessoConverter">
+                                <f:selectItem itemLabel="#{prkBundle.SelectOneMessage}"/>
+                                <f:selectItems value="#{permissoesAcessoController.items}"
+                                               var="idPermissaoAcessoItem"
+                                               itemValue="#{idPermissaoAcessoItem}"
+                                               itemLabel="#{idPermissaoAcessoItem.descricaoAcesso.toString()}"
+                                               />
+
+                            </p:selectOneMenu>
+                            <p:tooltip for="idPermissaoAcesso" value="#{uorPosController.getComponentMessages('idPermissaoAcesso', prkBundle.CreateUorPosHelpText_idPermissaoAcesso)}"/>
+                        </h:panelGroup>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{uorPosController.saveNew}" value="#{prkBundle.Save}" update="display,:UorPosListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('UorPosCreateDialog'));">
+                        <p:confirm header="#{prkBundle.ConfirmationHeader}" message="#{prkBundle.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                    <p:commandButton value="#{prkBundle.Cancel}" oncomplete="PF('UorPosCreateDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

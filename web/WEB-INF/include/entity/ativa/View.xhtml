@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AtivaViewDlg" widgetVar="AtivaViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{prkBundle.ViewAtivaTitle}" closeOnEscape="true">
+
+            <h:form id="AtivaViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{ativaController.selected != null}">
+
+                        <h:outputText value="#{prkBundle.ViewAtivaLabel_idAtiva}"/>
+                        <h:outputText value="#{ativaController.selected.idAtiva}" title="#{prkBundle.ViewAtivaTitle_idAtiva}"/>
+
+                        <h:outputText value="#{prkBundle.ViewAtivaLabel_nomeAtiva}"/>
+                        <h:outputText value="#{ativaController.selected.nomeAtiva}" title="#{prkBundle.ViewAtivaTitle_nomeAtiva}"/>
+
+                        <h:outputText value="#{prkBundle.ViewAtivaLabel_descricaoAtiva}"/>
+                        <h:outputText value="#{ativaController.selected.descricaoAtiva}" title="#{prkBundle.ViewAtivaTitle_descricaoAtiva}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{prkBundle.Close}" onclick="PF('AtivaViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

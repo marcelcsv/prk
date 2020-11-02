@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AtivaCreateDlg" widgetVar="AtivaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{prkBundle.CreateAtivaTitle}" closeOnEscape="true">
+
+            <h:form id="AtivaCreateForm">
+
+                <h:panelGroup id="display" rendered="#{ativaController.selected != null}">
+                    <p:panelGrid columns="2" columnClasses="column">
+
+                        <p:outputLabel value="#{prkBundle.CreateAtivaLabel_nomeAtiva}" for="nomeAtiva" />
+                        <h:panelGroup>
+                            <p:inputText id="nomeAtiva" value="#{ativaController.selected.nomeAtiva}" title="#{prkBundle.CreateAtivaTitle_nomeAtiva}" size="200" maxlength="200"/>
+                            <p:tooltip for="nomeAtiva" value="#{ativaController.getComponentMessages('nomeAtiva', prkBundle.CreateAtivaHelpText_nomeAtiva)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{prkBundle.CreateAtivaLabel_descricaoAtiva}" for="descricaoAtiva" />
+                        <h:panelGroup>
+                            <p:inputText id="descricaoAtiva" value="#{ativaController.selected.descricaoAtiva}" title="#{prkBundle.CreateAtivaTitle_descricaoAtiva}" size="200" maxlength="200"/>
+                            <p:tooltip for="descricaoAtiva" value="#{ativaController.getComponentMessages('descricaoAtiva', prkBundle.CreateAtivaHelpText_descricaoAtiva)}"/>
+                        </h:panelGroup>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{ativaController.saveNew}" value="#{prkBundle.Save}" update="display,:AtivaListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('AtivaCreateDialog'));">
+                        <p:confirm header="#{prkBundle.ConfirmationHeader}" message="#{prkBundle.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                    <p:commandButton value="#{prkBundle.Cancel}" oncomplete="PF('AtivaCreateDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

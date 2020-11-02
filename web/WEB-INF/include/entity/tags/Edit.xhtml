@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="TagsEditDlg" widgetVar="TagsEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{prkBundle.EditTagsTitle}" closeOnEscape="true">
+
+            <h:form id="TagsEditForm">
+
+                <h:panelGroup id="display">
+                    <p:tabView id="TagsTabView">
+
+                        <p:tab id="TagsTab1" title="#{prkBundle.TabHeaderPrefix} 1">
+                            <p:panelGrid  columns="2" columnClasses="column" rendered="#{tagsController.selected != null}">
+
+                                <h:outputLabel value="#{prkBundle.EditTagsLabel_tag}" for="tag" />
+                                <h:panelGroup>
+                                    <h:outputText id="tag" value="#{tagsController.selected.tag}" />
+                                    <p:tooltip for="tag" value="#{tagsController.getComponentMessages('tag', prkBundle.EditTagsHelpText_tag)}"/>
+                                </h:panelGroup>
+
+                                <p:outputLabel value="#{prkBundle.EditTagsLabel_segundaVia}" for="segundaVia" />
+                                <h:panelGroup>
+                                    <p:inputTextarea rows="4" cols="30" id="segundaVia" value="#{tagsController.selected.segundaVia}" title="#{prkBundle.EditTagsTitle_segundaVia}" />
+                                    <p:tooltip for="segundaVia" value="#{tagsController.getComponentMessages('segundaVia', prkBundle.EditTagsHelpText_segundaVia)}"/>
+                                </h:panelGroup>
+
+                                <p:outputLabel value="#{prkBundle.EditTagsLabel_acessoEstacionamento}" for="acessoEstacionamento" />
+                                <h:panelGroup>
+                                    <p:inputText id="acessoEstacionamento" value="#{tagsController.selected.acessoEstacionamento}" title="#{prkBundle.EditTagsTitle_acessoEstacionamento}" size="20" maxlength="20"/>
+                                    <p:tooltip for="acessoEstacionamento" value="#{tagsController.getComponentMessages('acessoEstacionamento', prkBundle.EditTagsHelpText_acessoEstacionamento)}"/>
+                                </h:panelGroup>
+
+                                <p:outputLabel value="#{prkBundle.EditTagsLabel_nome}" for="nome" />
+                                <h:panelGroup>
+                                    <p:inputText id="nome" value="#{tagsController.selected.nome}" title="#{prkBundle.EditTagsTitle_nome}" required="true" requiredMessage="#{prkBundle.EditTagsRequiredMessage_nome}" size="200" maxlength="200"/>
+                                    <p:tooltip for="nome" value="#{tagsController.getComponentMessages('nome', prkBundle.EditTagsHelpText_nome)}"/>
+                                </h:panelGroup>
+
+                                <p:outputLabel value="#{prkBundle.EditTagsLabel_situacao}" for="situacao" />
+                                <h:panelGroup>
+                                    <p:inputText id="situacao" value="#{tagsController.selected.situacao}" title="#{prkBundle.EditTagsTitle_situacao}" required="true" requiredMessage="#{prkBundle.EditTagsRequiredMessage_situacao}" size="100" maxlength="100"/>
+                                    <p:tooltip for="situacao" value="#{tagsController.getComponentMessages('situacao', prkBundle.EditTagsHelpText_situacao)}"/>
+                                </h:panelGroup>
+
+                                <p:outputLabel value="#{prkBundle.EditTagsLabel_veiculo1}" for="veiculo1" />
+                                <h:panelGroup>
+                                    <p:inputText id="veiculo1" value="#{tagsController.selected.veiculo1}" title="#{prkBundle.EditTagsTitle_veiculo1}" size="200" maxlength="200"/>
+                                    <p:tooltip for="veiculo1" value="#{tagsController.getComponentMessages('veiculo1', prkBundle.EditTagsHelpText_veiculo1)}"/>
+                                </h:panelGroup>
+
+                                <p:outputLabel value="#{prkBundle.EditTagsLabel_veiculo2}" for="veiculo2" />
+                                <h:panelGroup>
+                                    <p:inputText id="veiculo2" value="#{tagsController.selected.veiculo2}" title="#{prkBundle.EditTagsTitle_veiculo2}" size="200" maxlength="200"/>
+                                    <p:tooltip for="veiculo2" value="#{tagsController.getComponentMessages('veiculo2', prkBundle.EditTagsHelpText_veiculo2)}"/>
+                                </h:panelGroup>
+
+                                <p:outputLabel value="#{prkBundle.EditTagsLabel_veiculo3}" for="veiculo3" />
+                                <h:panelGroup>
+                                    <p:inputText id="veiculo3" value="#{tagsController.selected.veiculo3}" title="#{prkBundle.EditTagsTitle_veiculo3}" size="200" maxlength="200"/>
+                                    <p:tooltip for="veiculo3" value="#{tagsController.getComponentMessages('veiculo3', prkBundle.EditTagsHelpText_veiculo3)}"/>
+                                </h:panelGroup>
+
+                                <p:outputLabel value="#{prkBundle.EditTagsLabel_UFComercial}" for="UFComercial" />
+                                <h:panelGroup>
+                                    <p:inputText id="UFComercial" value="#{tagsController.selected.UFComercial}" title="#{prkBundle.EditTagsTitle_UFComercial}" size="2" maxlength="2"/>
+                                    <p:tooltip for="UFComercial" value="#{tagsController.getComponentMessages('UFComercial', prkBundle.EditTagsHelpText_UFComercial)}"/>
+                                </h:panelGroup>
+
+                                <p:outputLabel value="#{prkBundle.EditTagsLabel_bairroComercial}" for="bairroComercial" />
+                                <h:panelGroup>
+                                    <p:inputText id="bairroComercial" value="#{tagsController.selected.bairroComercial}" title="#{prkBundle.EditTagsTitle_bairroComercial}" size="100" maxlength="100"/>
+                                    <p:tooltip for="bairroComercial" value="#{tagsController.getComponentMessages('bairroComercial', prkBundle.EditTagsHelpText_bairroComercial)}"/>
+                                </h:panelGroup>
+
+                                <p:outputLabel value="#{prkBundle.EditTagsLabel_logradouroComercial}" for="logradouroComercial" />
+                                <h:panelGroup>
+                                    <p:inputTextarea rows="4" cols="30" id="logradouroComercial" value="#{tagsController.selected.logradouroComercial}" title="#{prkBundle.EditTagsTitle_logradouroComercial}" />
+                                    <p:tooltip for="logradouroComercial" value="#{tagsController.getComponentMessages('logradouroComercial', prkBundle.EditTagsHelpText_logradouroComercial)}"/>
+                                </h:panelGroup>
+
+                                <p:outputLabel value="#{prkBundle.EditTagsLabel_latitudeComercial}" for="latitudeComercial" />
+                                <h:panelGroup>
+                                    <p:inputText id="latitudeComercial" value="#{tagsController.selected.latitudeComercial}" title="#{prkBundle.EditTagsTitle_latitudeComercial}" size="50" maxlength="50"/>
+                                    <p:tooltip for="latitudeComercial" value="#{tagsController.getComponentMessages('latitudeComercial', prkBundle.EditTagsHelpText_latitudeComercial)}"/>
+                                </h:panelGroup>
+
+                                <p:outputLabel value="#{prkBundle.EditTagsLabel_longitudeComercial}" for="longitudeComercial" />
+                                <h:panelGroup>
+                                    <p:inputText id="longitudeComercial" value="#{tagsController.selected.longitudeComercial}" title="#{prkBundle.EditTagsTitle_longitudeComercial}" size="50" maxlength="50"/>
+                                    <p:tooltip for="longitudeComercial" value="#{tagsController.getComponentMessages('longitudeComercial', prkBundle.EditTagsHelpText_longitudeComercial)}"/>
+                                </h:panelGroup>
+
+                                <p:outputLabel value="#{prkBundle.EditTagsLabel_CEPComercial}" for="CEPComercial" />
+                                <h:panelGroup>
+                                    <p:inputText id="CEPComercial" value="#{tagsController.selected.CEPComercial}" title="#{prkBundle.EditTagsTitle_CEPComercial}" size="9" maxlength="9"/>
+                                    <p:tooltip for="CEPComercial" value="#{tagsController.getComponentMessages('CEPComercial', prkBundle.EditTagsHelpText_CEPComercial)}"/>
+                                </h:panelGroup>
+
+                                <p:outputLabel value="#{prkBundle.EditTagsLabel_UFResidencial}" for="UFResidencial" />
+                                <h:panelGroup>
+                                    <p:inputText id="UFResidencial" value="#{tagsController.selected.UFResidencial}" title="#{prkBundle.EditTagsTitle_UFResidencial}" size="2" maxlength="2"/>
+                                    <p:tooltip for="UFResidencial" value="#{tagsController.getComponentMessages('UFResidencial', prkBundle.EditTagsHelpText_UFResidencial)}"/>
+                                </h:panelGroup>
+
+                                <p:outputLabel value="#{prkBundle.EditTagsLabel_bairroResidencial}" for="bairroResidencial" />
+                                <h:panelGroup>
+                                    <p:inputText id="bairroResidencial" value="#{tagsController.selected.bairroResidencial}" title="#{prkBundle.EditTagsTitle_bairroResidencial}" size="100" maxlength="100"/>
+                                    <p:tooltip for="bairroResidencial" value="#{tagsController.getComponentMessages('bairroResidencial', prkBundle.EditTagsHelpText_bairroResidencial)}"/>
+                                </h:panelGroup>
+
+                                <p:outputLabel value="#{prkBundle.EditTagsLabel_logradouroResidencial}" for="logradouroResidencial" />
+                                <h:panelGroup>
+                                    <p:inputTextarea rows="4" cols="30" id="logradouroResidencial" value="#{tagsController.selected.logradouroResidencial}" title="#{prkBundle.EditTagsTitle_logradouroResidencial}" />
+                                    <p:tooltip for="logradouroResidencial" value="#{tagsController.getComponentMessages('logradouroResidencial', prkBundle.EditTagsHelpText_logradouroResidencial)}"/>
+                                </h:panelGroup>
+
+                                <p:outputLabel value="#{prkBundle.EditTagsLabel_CEPResidencial}" for="CEPResidencial" />
+                                <h:panelGroup>
+                                    <p:inputText id="CEPResidencial" value="#{tagsController.selected.CEPResidencial}" title="#{prkBundle.EditTagsTitle_CEPResidencial}" size="9" maxlength="9"/>
+                                    <p:tooltip for="CEPResidencial" value="#{tagsController.getComponentMessages('CEPResidencial', prkBundle.EditTagsHelpText_CEPResidencial)}"/>
+                                </h:panelGroup>
+
+                                <p:outputLabel value="#{prkBundle.EditTagsLabel_latitudeResidencial}" for="latitudeResidencial" />
+                                <h:panelGroup>
+                                    <p:inputText id="latitudeResidencial" value="#{tagsController.selected.latitudeResidencial}" title="#{prkBundle.EditTagsTitle_latitudeResidencial}" size="50" maxlength="50"/>
+                                    <p:tooltip for="latitudeResidencial" value="#{tagsController.getComponentMessages('latitudeResidencial', prkBundle.EditTagsHelpText_latitudeResidencial)}"/>
+                                </h:panelGroup>
+
+                                <p:outputLabel value="#{prkBundle.EditTagsLabel_longitudeResidencial}" for="longitudeResidencial" />
+                                <h:panelGroup>
+                                    <p:inputText id="longitudeResidencial" value="#{tagsController.selected.longitudeResidencial}" title="#{prkBundle.EditTagsTitle_longitudeResidencial}" size="50" maxlength="50"/>
+                                    <p:tooltip for="longitudeResidencial" value="#{tagsController.getComponentMessages('longitudeResidencial', prkBundle.EditTagsHelpText_longitudeResidencial)}"/>
+                                </h:panelGroup>
+
+                            </p:panelGrid>
+                        </p:tab>
+                        <p:tab id="TagsTab2" title="#{prkBundle.TabHeaderPrefix} 2">
+                            <p:panelGrid  columns="2" columnClasses="column" rendered="#{tagsController.selected != null}">
+                                <p:outputLabel value="#{prkBundle.EditTagsLabel_distancia}" for="distancia" />
+                                <h:panelGroup>
+                                    <p:inputText id="distancia" value="#{tagsController.selected.distancia}" title="#{prkBundle.EditTagsTitle_distancia}"/>
+                                    <p:tooltip for="distancia" value="#{tagsController.getComponentMessages('distancia', prkBundle.EditTagsHelpText_distancia)}"/>
+                                </h:panelGroup>
+
+                                <p:outputLabel value="#{prkBundle.EditTagsLabel_dataAtualizacao}" for="dataAtualizacao" />
+                                <h:panelGroup>
+                                    <p:calendar id="dataAtualizacao" pattern="MM/dd/yyyy HH:mm:ss" value="#{tagsController.selected.dataAtualizacao}" title="#{prkBundle.EditTagsTitle_dataAtualizacao}" required="true" requiredMessage="#{prkBundle.EditTagsRequiredMessage_dataAtualizacao}" showOn="button"/>
+                                    <p:tooltip for="dataAtualizacao" value="#{tagsController.getComponentMessages('dataAtualizacao', prkBundle.EditTagsHelpText_dataAtualizacao)}"/>
+                                </h:panelGroup>
+
+                                <p:outputLabel value="#{prkBundle.EditTagsLabel_ativa}" for="ativa" />
+                                <h:panelGroup>
+                                    <p:selectOneMenu id="ativa" value="#{tagsController.selected.ativa}" required="true" requiredMessage="#{prkBundle.EditTagsRequiredMessage_ativa}" converter="ativaConverter">
+                                        <f:selectItem itemLabel="#{prkBundle.SelectOneMessage}"/>
+                                        <f:selectItems value="#{ativaController.items}"
+                                                       var="ativaItem"
+                                                       itemValue="#{ativaItem}"
+                                                       itemLabel="#{ativaItem.descricaoAtiva.toString()}"
+                                                       />
+
+                                    </p:selectOneMenu>
+                                    <p:tooltip for="ativa" value="#{tagsController.getComponentMessages('ativa', prkBundle.EditTagsHelpText_ativa)}"/>
+                                </h:panelGroup>
+
+                                <p:outputLabel value="#{prkBundle.EditTagsLabel_prefixo}" for="prefixo" />
+                                <h:panelGroup>
+                                    <p:selectOneMenu id="prefixo" value="#{tagsController.selected.prefixo}"  converter="prefixosConverter">
+                                        <f:selectItem itemLabel="#{prkBundle.SelectOneMessage}"/>
+                                        <f:selectItems value="#{prefixosController.items}"
+                                                       var="prefixoItem"
+                                                       itemValue="#{prefixoItem}"
+                                                       itemLabel="#{prefixoItem.prefixo.toString()}"
+                                                       />
+
+                                    </p:selectOneMenu>
+                                    <p:tooltip for="prefixo" value="#{tagsController.getComponentMessages('prefixo', prkBundle.EditTagsHelpText_prefixo)}"/>
+                                </h:panelGroup>
+
+                                <p:outputLabel value="#{prkBundle.EditTagsLabel_status}" for="status" />
+                                <h:panelGroup>
+                                    <p:selectOneMenu id="status" value="#{tagsController.selected.status}" required="true" requiredMessage="#{prkBundle.EditTagsRequiredMessage_status}" converter="statusConverter">
+                                        <f:selectItem itemLabel="#{prkBundle.SelectOneMessage}"/>
+                                        <f:selectItems value="#{statusController.items}"
+                                                       var="statusItem"
+                                                       itemValue="#{statusItem}"
+                                                       itemLabel="#{statusItem.descricaoStatus.toString()}"
+                                                       />
+
+                                    </p:selectOneMenu>
+                                    <p:tooltip for="status" value="#{tagsController.getComponentMessages('status', prkBundle.EditTagsHelpText_status)}"/>
+                                </h:panelGroup>
+
+                                <p:outputLabel value="#{prkBundle.EditTagsLabel_matricula}" for="matricula" />
+                                <h:panelGroup>
+                                    <p:selectOneMenu id="matricula" value="#{tagsController.selected.matricula}"  converter="uorPosConverter">
+                                        <f:selectItem itemLabel="#{prkBundle.SelectOneMessage}"/>
+                                        <f:selectItems value="#{uorPosController.items}"
+                                                       var="matriculaItem"
+                                                       itemValue="#{matriculaItem}"
+                                                       itemLabel="#{matriculaItem.matricula.toString()}"
+                                                       />
+
+                                    </p:selectOneMenu>
+                                    <p:tooltip for="matricula" value="#{tagsController.getComponentMessages('matricula', prkBundle.EditTagsHelpText_matricula)}"/>
+                                </h:panelGroup>
+
+                                <p:outputLabel value="#{prkBundle.EditTagsLabel_matriculaSolicitante}" for="matriculaSolicitante" />
+                                <h:panelGroup>
+                                    <p:selectOneMenu id="matriculaSolicitante" value="#{tagsController.selected.matriculaSolicitante}"  converter="uorPosConverter">
+                                        <f:selectItem itemLabel="#{prkBundle.SelectOneMessage}"/>
+                                        <f:selectItems value="#{uorPosController.items}"
+                                                       var="matriculaSolicitanteItem"
+                                                       itemValue="#{matriculaSolicitanteItem}"
+                                                       itemLabel="#{matriculaSolicitanteItem.matricula.toString()}"
+                                                       />
+
+                                    </p:selectOneMenu>
+                                    <p:tooltip for="matriculaSolicitante" value="#{tagsController.getComponentMessages('matriculaSolicitante', prkBundle.EditTagsHelpText_matriculaSolicitante)}"/>
+                                </h:panelGroup>
+
+                                <p:outputLabel value="#{prkBundle.EditTagsLabel_valeTransporte}" for="valeTransporte" />
+                                <h:panelGroup>
+                                    <p:inputText id="valeTransporte" value="#{tagsController.selected.valeTransporte}" title="#{prkBundle.EditTagsTitle_valeTransporte}" size="50" maxlength="50"/>
+                                    <p:tooltip for="valeTransporte" value="#{tagsController.getComponentMessages('valeTransporte', prkBundle.EditTagsHelpText_valeTransporte)}"/>
+                                </h:panelGroup>
+
+
+                            </p:panelGrid>
+                        </p:tab>
+                    </p:tabView>
+                    <p:commandButton actionListener="#{tagsController.save}" value="#{prkBundle.Save}" update="display,:TagsListForm:datalist,:TagsListForm:TagsDataTableContextMenu,:growl" oncomplete="handleSubmit(xhr,status,args,PF('TagsEditDialog'));">
+                        <p:confirm header="#{prkBundle.ConfirmationHeader}" message="#{prkBundle.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{prkBundle.Cancel}" oncomplete="PF('TagsEditDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

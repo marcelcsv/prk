@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="JurisdicionadasEditDlg" widgetVar="JurisdicionadasEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{prkBundle.EditJurisdicionadasTitle}" closeOnEscape="true">
+
+            <h:form id="JurisdicionadasEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" columnClasses="column" rendered="#{jurisdicionadasController.selected != null}">
+
+
+                        <h:outputLabel value="#{prkBundle.EditJurisdicionadasLabel_idJurisdicionada}" for="idJurisdicionada" />
+                        <h:panelGroup>
+                            <h:outputText id="idJurisdicionada" value="#{jurisdicionadasController.selected.idJurisdicionada}" />
+                            <p:tooltip for="idJurisdicionada" value="#{jurisdicionadasController.getComponentMessages('idJurisdicionada', prkBundle.EditJurisdicionadasHelpText_idJurisdicionada)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{prkBundle.EditJurisdicionadasLabel_prefixoJurisdicionada}" for="prefixoJurisdicionada" />
+                        <h:panelGroup>
+                            <p:inputText id="prefixoJurisdicionada" value="#{jurisdicionadasController.selected.prefixoJurisdicionada}" title="#{prkBundle.EditJurisdicionadasTitle_prefixoJurisdicionada}"/>
+                            <p:tooltip for="prefixoJurisdicionada" value="#{jurisdicionadasController.getComponentMessages('prefixoJurisdicionada', prkBundle.EditJurisdicionadasHelpText_prefixoJurisdicionada)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{prkBundle.EditJurisdicionadasLabel_nomePrefixoJurisdicionada}" for="nomePrefixoJurisdicionada" />
+                        <h:panelGroup>
+                            <p:inputText id="nomePrefixoJurisdicionada" value="#{jurisdicionadasController.selected.nomePrefixoJurisdicionada}" title="#{prkBundle.EditJurisdicionadasTitle_nomePrefixoJurisdicionada}" size="200" maxlength="200"/>
+                            <p:tooltip for="nomePrefixoJurisdicionada" value="#{jurisdicionadasController.getComponentMessages('nomePrefixoJurisdicionada', prkBundle.EditJurisdicionadasHelpText_nomePrefixoJurisdicionada)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{prkBundle.EditJurisdicionadasLabel_prefixo}" for="prefixo" />
+                        <h:panelGroup>
+                            <p:selectOneMenu id="prefixo" value="#{jurisdicionadasController.selected.prefixo}"  converter="prefixosConverter">
+                                <f:selectItem itemLabel="#{prkBundle.SelectOneMessage}"/>
+                                <f:selectItems value="#{prefixosController.items}"
+                                               var="prefixoItem"
+                                               itemValue="#{prefixoItem}"
+                                               itemLabel="#{prefixoItem.prefixo.toString()}"
+                                               />
+
+                            </p:selectOneMenu>
+                            <p:tooltip for="prefixo" value="#{jurisdicionadasController.getComponentMessages('prefixo', prkBundle.EditJurisdicionadasHelpText_prefixo)}"/>
+                        </h:panelGroup>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{jurisdicionadasController.save}" value="#{prkBundle.Save}" update="display,:JurisdicionadasListForm:datalist,:JurisdicionadasListForm:JurisdicionadasDataTableContextMenu,:growl" oncomplete="handleSubmit(xhr,status,args,PF('JurisdicionadasEditDialog'));">
+                        <p:confirm header="#{prkBundle.ConfirmationHeader}" message="#{prkBundle.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{prkBundle.Cancel}" oncomplete="PF('JurisdicionadasEditDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

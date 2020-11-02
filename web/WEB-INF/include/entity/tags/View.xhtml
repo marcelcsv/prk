@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TagsViewDlg" widgetVar="TagsViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{prkBundle.ViewTagsTitle}" closeOnEscape="true">
+
+            <h:form id="TagsViewForm">
+
+                <h:panelGroup id="display">
+                    <p:tabView id="TagsTabView">
+
+                        <p:tab id="TagsTab1" title="#{prkBundle.TabHeaderPrefix} 1">
+                            <p:panelGrid columns="2" columnClasses="column" rendered="#{tagsController.selected != null}">
+                                <h:outputText value="#{prkBundle.ViewTagsLabel_tag}"/>
+                                <h:outputText value="#{tagsController.selected.tag}" title="#{prkBundle.ViewTagsTitle_tag}"/>
+
+                                <h:outputText value="#{prkBundle.ViewTagsLabel_segundaVia}"/>
+                                <h:outputText value="#{tagsController.selected.segundaVia}" title="#{prkBundle.ViewTagsTitle_segundaVia}"/>
+
+                                <h:outputText value="#{prkBundle.ViewTagsLabel_acessoEstacionamento}"/>
+                                <h:outputText value="#{tagsController.selected.acessoEstacionamento}" title="#{prkBundle.ViewTagsTitle_acessoEstacionamento}"/>
+
+                                <h:outputText value="#{prkBundle.ViewTagsLabel_nome}"/>
+                                <h:outputText value="#{tagsController.selected.nome}" title="#{prkBundle.ViewTagsTitle_nome}"/>
+
+                                <h:outputText value="#{prkBundle.ViewTagsLabel_situacao}"/>
+                                <h:outputText value="#{tagsController.selected.situacao}" title="#{prkBundle.ViewTagsTitle_situacao}"/>
+
+                                <h:outputText value="#{prkBundle.ViewTagsLabel_veiculo1}"/>
+                                <h:outputText value="#{tagsController.selected.veiculo1}" title="#{prkBundle.ViewTagsTitle_veiculo1}"/>
+
+                                <h:outputText value="#{prkBundle.ViewTagsLabel_veiculo2}"/>
+                                <h:outputText value="#{tagsController.selected.veiculo2}" title="#{prkBundle.ViewTagsTitle_veiculo2}"/>
+
+                                <h:outputText value="#{prkBundle.ViewTagsLabel_veiculo3}"/>
+                                <h:outputText value="#{tagsController.selected.veiculo3}" title="#{prkBundle.ViewTagsTitle_veiculo3}"/>
+
+                                <h:outputText value="#{prkBundle.ViewTagsLabel_UFComercial}"/>
+                                <h:outputText value="#{tagsController.selected.UFComercial}" title="#{prkBundle.ViewTagsTitle_UFComercial}"/>
+
+                                <h:outputText value="#{prkBundle.ViewTagsLabel_bairroComercial}"/>
+                                <h:outputText value="#{tagsController.selected.bairroComercial}" title="#{prkBundle.ViewTagsTitle_bairroComercial}"/>
+
+                                <h:outputText value="#{prkBundle.ViewTagsLabel_logradouroComercial}"/>
+                                <h:outputText value="#{tagsController.selected.logradouroComercial}" title="#{prkBundle.ViewTagsTitle_logradouroComercial}"/>
+
+                                <h:outputText value="#{prkBundle.ViewTagsLabel_latitudeComercial}"/>
+                                <h:outputText value="#{tagsController.selected.latitudeComercial}" title="#{prkBundle.ViewTagsTitle_latitudeComercial}"/>
+
+                                <h:outputText value="#{prkBundle.ViewTagsLabel_longitudeComercial}"/>
+                                <h:outputText value="#{tagsController.selected.longitudeComercial}" title="#{prkBundle.ViewTagsTitle_longitudeComercial}"/>
+
+                                <h:outputText value="#{prkBundle.ViewTagsLabel_CEPComercial}"/>
+                                <h:outputText value="#{tagsController.selected.CEPComercial}" title="#{prkBundle.ViewTagsTitle_CEPComercial}"/>
+
+                                <h:outputText value="#{prkBundle.ViewTagsLabel_UFResidencial}"/>
+                                <h:outputText value="#{tagsController.selected.UFResidencial}" title="#{prkBundle.ViewTagsTitle_UFResidencial}"/>
+
+                                <h:outputText value="#{prkBundle.ViewTagsLabel_bairroResidencial}"/>
+                                <h:outputText value="#{tagsController.selected.bairroResidencial}" title="#{prkBundle.ViewTagsTitle_bairroResidencial}"/>
+
+                                <h:outputText value="#{prkBundle.ViewTagsLabel_logradouroResidencial}"/>
+                                <h:outputText value="#{tagsController.selected.logradouroResidencial}" title="#{prkBundle.ViewTagsTitle_logradouroResidencial}"/>
+
+                                <h:outputText value="#{prkBundle.ViewTagsLabel_CEPResidencial}"/>
+                                <h:outputText value="#{tagsController.selected.CEPResidencial}" title="#{prkBundle.ViewTagsTitle_CEPResidencial}"/>
+
+                                <h:outputText value="#{prkBundle.ViewTagsLabel_latitudeResidencial}"/>
+                                <h:outputText value="#{tagsController.selected.latitudeResidencial}" title="#{prkBundle.ViewTagsTitle_latitudeResidencial}"/>
+
+                                <h:outputText value="#{prkBundle.ViewTagsLabel_longitudeResidencial}"/>
+                                <h:outputText value="#{tagsController.selected.longitudeResidencial}" title="#{prkBundle.ViewTagsTitle_longitudeResidencial}"/>
+
+                            </p:panelGrid>
+                        </p:tab>
+                        <p:tab id="TagsTab2" title="#{prkBundle.TabHeaderPrefix} 2">
+                            <p:panelGrid columns="2" columnClasses="column" rendered="#{tagsController.selected != null}">
+                                <h:outputText value="#{prkBundle.ViewTagsLabel_distancia}"/>
+                                <h:outputText value="#{tagsController.selected.distancia}" title="#{prkBundle.ViewTagsTitle_distancia}"/>
+
+                                <h:outputText value="#{prkBundle.ViewTagsLabel_dataAtualizacao}"/>
+                                <h:outputText value="#{tagsController.selected.dataAtualizacao}" title="#{prkBundle.ViewTagsTitle_dataAtualizacao}">
+                                    <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                                </h:outputText>
+
+                                <h:outputText value="#{prkBundle.ViewTagsLabel_ativa}"/>
+                                <h:outputText value="#{tagsController.selected.ativa.descricaoAtiva}"/>
+
+                                <h:outputText value="#{prkBundle.ViewTagsLabel_prefixo}"/>
+                                <h:outputText value="#{tagsController.selected.prefixo.prefixo}"/>
+
+                                <h:outputText value="#{prkBundle.ViewTagsLabel_status}"/>
+                                <h:outputText value="#{tagsController.selected.status.descricaoStatus}"/>
+
+                                <h:outputText value="#{prkBundle.ViewTagsLabel_matricula}"/>
+                                <h:outputText value="#{tagsController.selected.matricula.matricula}"/>
+
+                                <h:outputText value="#{prkBundle.ViewTagsLabel_matriculaSolicitante}"/>
+                                <h:outputText value="#{tagsController.selected.matriculaSolicitante.matricula}"/>
+                                
+                                <h:outputText value="#{prkBundle.ViewTagsLabel_valeTransporte}"/>
+                                <h:outputText value="#{tagsController.selected.valeTransporte}" title="#{prkBundle.ViewTagsTitle_valeTransporte}"/>
+                                
+                            </p:panelGrid>
+                        </p:tab>
+                    </p:tabView>
+                    <p:commandButton value="#{prkBundle.Close}" onclick="PF('TagsViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="PermissoesAcessoListForm">
+
+        <p:panel header="#{prkBundle.ListPermissoesAcessoTitle}">
+            <p:contextMenu id="PermissoesAcessoDataTableContextMenu" for="datalist">  
+                <p:menuitem value="#{prkBundle.Create}" onclick="document.getElementById('PermissoesAcessoListForm:createButton').click();" icon="ui-icon-plus"/>
+                <p:menuitem value="#{prkBundle.View}" onclick="document.getElementById('PermissoesAcessoListForm:viewButton').click();" icon="ui-icon-search"/>
+                <p:menuitem value="#{prkBundle.Edit}" onclick="document.getElementById('PermissoesAcessoListForm:editButton').click();" icon="ui-icon-pencil"/>
+                <p:menuitem value="#{prkBundle.Delete}" onclick="document.getElementById('PermissoesAcessoListForm:deleteButton').click();" icon="ui-icon-trash"/>
+                <p:separator/>
+                <p:menuitem value="#{prkBundle.PermissoesAcessoMenuItem_uorPosCollection}" icon="ui-icon-search"  action="#{permissoesAcessoController.navigateUorPosCollection}" disabled="#{permissoesAcessoController.isUorPosCollectionEmpty}" ajax="false"/>  
+            </p:contextMenu>
+            <p:dataTable id="datalist"
+                         value="#{permissoesAcessoController.items}"
+                         lazy="false"
+                         rowKey="#{item.idPermissaoAcesso}"
+                         var="item"
+                         paginator="true"
+                         rows="10"
+                         rowsPerPageTemplate="10,30,50"
+                         selectionMode="single"
+                         selection="#{permissoesAcessoController.selected}"
+                         filteredValue="#{permissoesAcessoController.filteredItems}">
+                <!--
+                         To enable Lazy Loading, please copy/replace the following lines above,
+                         and be sure to replace the word HASH with the # symbol:
+                
+                         value="HASH{permissoesAcessoController.lazyItems}"
+                         lazy="true"
+                         rowKey="HASH{item.idPermissaoAcesso}"  <<< Remove this line
+                -->
+
+
+                <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:PermissoesAcessoDataTableContextMenu"/>
+                <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:PermissoesAcessoDataTableContextMenu"/>
+                <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton"/>
+                <p:ajax event="rowDblselect" onsuccess="document.getElementById('PermissoesAcessoListForm:viewButton').click();"/>
+
+                <p:column sortBy="#{item.idPermissaoAcesso}" filterBy="#{item.idPermissaoAcesso}">
+                    <f:facet name="header">
+                        <h:outputText value="#{prkBundle.ListPermissoesAcessoTitle_idPermissaoAcesso}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.idPermissaoAcesso}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.nomeAcesso}" filterBy="#{item.nomeAcesso}">
+                    <f:facet name="header">
+                        <h:outputText value="#{prkBundle.ListPermissoesAcessoTitle_nomeAcesso}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.nomeAcesso}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.descricaoAcesso}" filterBy="#{item.descricaoAcesso}">
+                    <f:facet name="header">
+                        <h:outputText value="#{prkBundle.ListPermissoesAcessoTitle_descricaoAcesso}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.descricaoAcesso}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.siglaAcesso}" filterBy="#{item.siglaAcesso}">
+                    <f:facet name="header">
+                        <h:outputText value="#{prkBundle.ListPermissoesAcessoTitle_siglaAcesso}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.siglaAcesso}"/>
+                </p:column>
+
+
+            </p:dataTable>
+
+            <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{prkBundle.Create}" actionListener="#{permissoesAcessoController.prepareCreate}" update=":PermissoesAcessoCreateForm" oncomplete="PF('PermissoesAcessoCreateDialog').show()"/>
+            <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{prkBundle.View}" update=":PermissoesAcessoViewForm" oncomplete="PF('PermissoesAcessoViewDialog').show()" disabled="#{empty permissoesAcessoController.selected}"/>
+            <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{prkBundle.Edit}" update=":PermissoesAcessoEditForm" oncomplete="PF('PermissoesAcessoEditDialog').show()" disabled="#{empty permissoesAcessoController.selected}"/>
+            <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{prkBundle.Delete}" actionListener="#{permissoesAcessoController.delete}" update=":growl,datalist" disabled="#{empty permissoesAcessoController.selected}">
+                <p:confirm header="#{prkBundle.ConfirmationHeader}" message="#{prkBundle.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+            </p:commandButton>
+
+        </p:panel>
+        <ui:include src="/WEB-INF/include/confirmation.xhtml"/>
+    </h:form>
+
+</ui:composition>

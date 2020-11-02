@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PrefixosCreateDlg" widgetVar="PrefixosCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{prkBundle.CreatePrefixosTitle}" closeOnEscape="true">
+
+            <h:form id="PrefixosCreateForm">
+
+                <h:panelGroup id="display" rendered="#{prefixosController.selected != null}">
+                    <p:panelGrid columns="2" columnClasses="column">
+
+                        <p:outputLabel value="#{prkBundle.CreatePrefixosLabel_prefixo}" for="prefixo" />
+                        <h:panelGroup>
+                            <p:inputText id="prefixo" value="#{prefixosController.selected.prefixo}" title="#{prkBundle.CreatePrefixosTitle_prefixo}" required="true" requiredMessage="#{prkBundle.CreatePrefixosRequiredMessage_prefixo}"/>
+                            <p:tooltip for="prefixo" value="#{prefixosController.getComponentMessages('prefixo', prkBundle.CreatePrefixosHelpText_prefixo)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{prkBundle.CreatePrefixosLabel_nomePrefixo}" for="nomePrefixo" />
+                        <h:panelGroup>
+                            <p:inputText id="nomePrefixo" value="#{prefixosController.selected.nomePrefixo}" title="#{prkBundle.CreatePrefixosTitle_nomePrefixo}" size="100" maxlength="100"/>
+                            <p:tooltip for="nomePrefixo" value="#{prefixosController.getComponentMessages('nomePrefixo', prkBundle.CreatePrefixosHelpText_nomePrefixo)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{prkBundle.CreatePrefixosLabel_EMailInterno}" for="EMailInterno" />
+                        <h:panelGroup>
+                            <p:inputText id="EMailInterno" value="#{prefixosController.selected.EMailInterno}" title="#{prkBundle.CreatePrefixosTitle_EMailInterno}" size="25" maxlength="25"/>
+                            <p:tooltip for="EMailInterno" value="#{prefixosController.getComponentMessages('EMailInterno', prkBundle.CreatePrefixosHelpText_EMailInterno)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{prkBundle.CreatePrefixosLabel_EMailExterno}" for="EMailExterno" />
+                        <h:panelGroup>
+                            <p:inputText id="EMailExterno" value="#{prefixosController.selected.EMailExterno}" title="#{prkBundle.CreatePrefixosTitle_EMailExterno}" size="25" maxlength="25"/>
+                            <p:tooltip for="EMailExterno" value="#{prefixosController.getComponentMessages('EMailExterno', prkBundle.CreatePrefixosHelpText_EMailExterno)}"/>
+                        </h:panelGroup>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{prefixosController.saveNew}" value="#{prkBundle.Save}" update="display,:PrefixosListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('PrefixosCreateDialog'));">
+                        <p:confirm header="#{prkBundle.ConfirmationHeader}" message="#{prkBundle.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                    <p:commandButton value="#{prkBundle.Cancel}" oncomplete="PF('PrefixosCreateDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

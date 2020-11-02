@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UorPosViewDlg" widgetVar="UorPosViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{prkBundle.ViewUorPosTitle}" closeOnEscape="true">
+
+            <h:form id="UorPosViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{uorPosController.selected != null}">
+
+                        <h:outputText value="#{prkBundle.ViewUorPosLabel_matricula}"/>
+                        <h:outputText value="#{uorPosController.selected.matricula}" title="#{prkBundle.ViewUorPosTitle_matricula}"/>
+
+                        <h:outputText value="#{prkBundle.ViewUorPosLabel_nome}"/>
+                        <h:outputText value="#{uorPosController.selected.nome}" title="#{prkBundle.ViewUorPosTitle_nome}"/>
+
+                        <h:outputText value="#{prkBundle.ViewUorPosLabel_nomeGuerra}"/>
+                        <h:outputText value="#{uorPosController.selected.nomeGuerra}" title="#{prkBundle.ViewUorPosTitle_nomeGuerra}"/>
+
+                        <h:outputText value="#{prkBundle.ViewUorPosLabel_codComissao}"/>
+                        <h:outputText value="#{uorPosController.selected.codComissao}" title="#{prkBundle.ViewUorPosTitle_codComissao}"/>
+
+                        <h:outputText value="#{prkBundle.ViewUorPosLabel_nomeComissao}"/>
+                        <h:outputText value="#{uorPosController.selected.nomeComissao}" title="#{prkBundle.ViewUorPosTitle_nomeComissao}"/>
+
+                        <h:outputText value="#{prkBundle.ViewUorPosLabel_codNivel}"/>
+                        <h:outputText value="#{uorPosController.selected.codNivel}" title="#{prkBundle.ViewUorPosTitle_codNivel}"/>
+
+                        <h:outputText value="#{prkBundle.ViewUorPosLabel_descNivel}"/>
+                        <h:outputText value="#{uorPosController.selected.descNivel}" title="#{prkBundle.ViewUorPosTitle_descNivel}"/>
+
+                        <h:outputText value="#{prkBundle.ViewUorPosLabel_prefixo}"/>
+                        <h:outputText value="#{uorPosController.selected.prefixo}" title="#{prkBundle.ViewUorPosTitle_prefixo}"/>
+
+                        <h:outputText value="#{prkBundle.ViewUorPosLabel_UORpos}"/>
+                        <h:outputText value="#{uorPosController.selected.UORpos}" title="#{prkBundle.ViewUorPosTitle_UORpos}"/>
+
+                        <h:outputText value="#{prkBundle.ViewUorPosLabel_EMailFuncionario}"/>
+                        <h:outputText value="#{uorPosController.selected.EMailFuncionario}" title="#{prkBundle.ViewUorPosTitle_EMailFuncionario}"/>
+
+                        <h:outputText value="#{prkBundle.ViewUorPosLabel_dataPermissaoAcesso}"/>
+                        <h:outputText value="#{uorPosController.selected.dataPermissaoAcesso}" title="#{prkBundle.ViewUorPosTitle_dataPermissaoAcesso}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+
+                        <h:outputText value="#{prkBundle.ViewUorPosLabel_dataAtualizacao}"/>
+                        <h:outputText value="#{uorPosController.selected.dataAtualizacao}" title="#{prkBundle.ViewUorPosTitle_dataAtualizacao}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+
+                        <h:outputText value="#{prkBundle.ViewUorPosLabel_idPermissaoAcesso}"/>
+                        <h:outputText value="#{uorPosController.selected.idPermissaoAcesso.descricaoAcesso}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{prkBundle.Close}" onclick="PF('UorPosViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

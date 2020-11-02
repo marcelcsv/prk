@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="PermissoesAcessoEditDlg" widgetVar="PermissoesAcessoEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{prkBundle.EditPermissoesAcessoTitle}" closeOnEscape="true">
+
+            <h:form id="PermissoesAcessoEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" columnClasses="column" rendered="#{permissoesAcessoController.selected != null}">
+
+
+                        <h:outputLabel value="#{prkBundle.EditPermissoesAcessoLabel_idPermissaoAcesso}" for="idPermissaoAcesso" />
+                        <h:panelGroup>
+                            <h:outputText id="idPermissaoAcesso" value="#{permissoesAcessoController.selected.idPermissaoAcesso}" />
+                            <p:tooltip for="idPermissaoAcesso" value="#{permissoesAcessoController.getComponentMessages('idPermissaoAcesso', prkBundle.EditPermissoesAcessoHelpText_idPermissaoAcesso)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{prkBundle.EditPermissoesAcessoLabel_nomeAcesso}" for="nomeAcesso" />
+                        <h:panelGroup>
+                            <p:inputText id="nomeAcesso" value="#{permissoesAcessoController.selected.nomeAcesso}" title="#{prkBundle.EditPermissoesAcessoTitle_nomeAcesso}" size="100" maxlength="100"/>
+                            <p:tooltip for="nomeAcesso" value="#{permissoesAcessoController.getComponentMessages('nomeAcesso', prkBundle.EditPermissoesAcessoHelpText_nomeAcesso)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{prkBundle.EditPermissoesAcessoLabel_descricaoAcesso}" for="descricaoAcesso" />
+                        <h:panelGroup>
+                            <p:inputTextarea rows="4" cols="30" id="descricaoAcesso" value="#{permissoesAcessoController.selected.descricaoAcesso}" title="#{prkBundle.EditPermissoesAcessoTitle_descricaoAcesso}" />
+                            <p:tooltip for="descricaoAcesso" value="#{permissoesAcessoController.getComponentMessages('descricaoAcesso', prkBundle.EditPermissoesAcessoHelpText_descricaoAcesso)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{prkBundle.EditPermissoesAcessoLabel_siglaAcesso}" for="siglaAcesso" />
+                        <h:panelGroup>
+                            <p:inputText id="siglaAcesso" value="#{permissoesAcessoController.selected.siglaAcesso}" title="#{prkBundle.EditPermissoesAcessoTitle_siglaAcesso}" size="10" maxlength="10"/>
+                            <p:tooltip for="siglaAcesso" value="#{permissoesAcessoController.getComponentMessages('siglaAcesso', prkBundle.EditPermissoesAcessoHelpText_siglaAcesso)}"/>
+                        </h:panelGroup>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{permissoesAcessoController.save}" value="#{prkBundle.Save}" update="display,:PermissoesAcessoListForm:datalist,:PermissoesAcessoListForm:PermissoesAcessoDataTableContextMenu,:growl" oncomplete="handleSubmit(xhr,status,args,PF('PermissoesAcessoEditDialog'));">
+                        <p:confirm header="#{prkBundle.ConfirmationHeader}" message="#{prkBundle.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{prkBundle.Cancel}" oncomplete="PF('PermissoesAcessoEditDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

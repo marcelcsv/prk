@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="UorPosListForm">
+
+        <p:panel header="#{prkBundle.ListUorPosTitle}">
+            <p:contextMenu id="UorPosDataTableContextMenu" for="datalist">  
+                <p:menuitem value="#{prkBundle.Create}" onclick="document.getElementById('UorPosListForm:createButton').click();" icon="ui-icon-plus"/>
+                <p:menuitem value="#{prkBundle.View}" onclick="document.getElementById('UorPosListForm:viewButton').click();" icon="ui-icon-search"/>
+                <p:menuitem value="#{prkBundle.Edit}" onclick="document.getElementById('UorPosListForm:editButton').click();" icon="ui-icon-pencil"/>
+                <p:menuitem value="#{prkBundle.Delete}" onclick="document.getElementById('UorPosListForm:deleteButton').click();" icon="ui-icon-trash"/>
+                <p:separator/>
+                <p:menuitem value="#{prkBundle.UorPosMenuItem_idPermissaoAcesso}" icon="ui-icon-search"  actionListener="#{uorPosController.prepareIdPermissaoAcesso}" update=":PermissoesAcessoViewForm" oncomplete="PF('PermissoesAcessoViewDialog').show()" disabled="#{empty uorPosController.selected.idPermissaoAcesso}"/>  
+                <p:menuitem value="#{prkBundle.UorPosMenuItem_tagsCollection}" icon="ui-icon-search"  action="#{uorPosController.navigateTagsCollection}" disabled="#{uorPosController.isTagsCollectionEmpty}" ajax="false"/>  
+                <p:menuitem value="#{prkBundle.UorPosMenuItem_tagsCollection1}" icon="ui-icon-search"  action="#{uorPosController.navigateTagsCollection1}" disabled="#{uorPosController.isTagsCollection1Empty}" ajax="false"/>  
+            </p:contextMenu>
+            <p:dataTable id="datalist"
+                         value="#{uorPosController.items}"
+                         lazy="false"
+                         rowKey="#{item.matricula}"
+                         var="item"
+                         paginator="true"
+                         rows="10"
+                         rowsPerPageTemplate="10,30,50"
+                         selectionMode="single"
+                         selection="#{uorPosController.selected}"
+                         filteredValue="#{uorPosController.filteredItems}">
+                <!--
+                         To enable Lazy Loading, please copy/replace the following lines above,
+                         and be sure to replace the word HASH with the # symbol:
+                
+                         value="HASH{uorPosController.lazyItems}"
+                         lazy="true"
+                         rowKey="HASH{item.matricula}"  <<< Remove this line
+                -->
+
+
+                <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:UorPosDataTableContextMenu" listener="#{uorPosController.resetParents}"/>
+                <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:UorPosDataTableContextMenu" listener="#{uorPosController.resetParents}"/>
+                <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton" listener="#{uorPosController.resetParents}"/>
+                <p:ajax event="rowDblselect" onsuccess="document.getElementById('UorPosListForm:viewButton').click();"/>
+
+                <p:column sortBy="#{item.matricula}" filterBy="#{item.matricula}">
+                    <f:facet name="header">
+                        <h:outputText value="#{prkBundle.ListUorPosTitle_matricula}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.matricula}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.nome}" filterBy="#{item.nome}">
+                    <f:facet name="header">
+                        <h:outputText value="#{prkBundle.ListUorPosTitle_nome}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.nome}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.nomeGuerra}" filterBy="#{item.nomeGuerra}">
+                    <f:facet name="header">
+                        <h:outputText value="#{prkBundle.ListUorPosTitle_nomeGuerra}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.nomeGuerra}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.codComissao}" filterBy="#{item.codComissao}">
+                    <f:facet name="header">
+                        <h:outputText value="#{prkBundle.ListUorPosTitle_codComissao}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.codComissao}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.nomeComissao}" filterBy="#{item.nomeComissao}">
+                    <f:facet name="header">
+                        <h:outputText value="#{prkBundle.ListUorPosTitle_nomeComissao}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.nomeComissao}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.codNivel}" filterBy="#{item.codNivel}">
+                    <f:facet name="header">
+                        <h:outputText value="#{prkBundle.ListUorPosTitle_codNivel}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.codNivel}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.descNivel}" filterBy="#{item.descNivel}">
+                    <f:facet name="header">
+                        <h:outputText value="#{prkBundle.ListUorPosTitle_descNivel}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.descNivel}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.prefixo}" filterBy="#{item.prefixo}">
+                    <f:facet name="header">
+                        <h:outputText value="#{prkBundle.ListUorPosTitle_prefixo}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.prefixo}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.UORpos}" filterBy="#{item.UORpos}">
+                    <f:facet name="header">
+                        <h:outputText value="#{prkBundle.ListUorPosTitle_UORpos}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.UORpos}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.EMailFuncionario}" filterBy="#{item.EMailFuncionario}">
+                    <f:facet name="header">
+                        <h:outputText value="#{prkBundle.ListUorPosTitle_EMailFuncionario}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.EMailFuncionario}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.dataPermissaoAcesso}" filterBy="#{item.dataPermissaoAcesso}">
+                    <f:facet name="header">
+                        <h:outputText value="#{prkBundle.ListUorPosTitle_dataPermissaoAcesso}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.dataPermissaoAcesso}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                </p:column>
+
+
+                <p:column sortBy="#{item.dataAtualizacao}" filterBy="#{item.dataAtualizacao}">
+                    <f:facet name="header">
+                        <h:outputText value="#{prkBundle.ListUorPosTitle_dataAtualizacao}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.dataAtualizacao}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                </p:column>
+
+
+                <p:column sortBy="#{item.idPermissaoAcesso.descricaoAcesso}" filterBy="#{item.idPermissaoAcesso.descricaoAcesso}">
+                    <f:facet name="header">
+                        <h:outputText value="#{prkBundle.ListUorPosTitle_idPermissaoAcesso}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.idPermissaoAcesso.descricaoAcesso}"/>
+                </p:column>
+
+
+            </p:dataTable>
+
+            <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{prkBundle.Create}" actionListener="#{uorPosController.prepareCreate}" update=":UorPosCreateForm" oncomplete="PF('UorPosCreateDialog').show()"/>
+            <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{prkBundle.View}" update=":UorPosViewForm" oncomplete="PF('UorPosViewDialog').show()" disabled="#{empty uorPosController.selected}"/>
+            <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{prkBundle.Edit}" update=":UorPosEditForm" oncomplete="PF('UorPosEditDialog').show()" disabled="#{empty uorPosController.selected}"/>
+            <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{prkBundle.Delete}" actionListener="#{uorPosController.delete}" update=":growl,datalist" disabled="#{empty uorPosController.selected}">
+                <p:confirm header="#{prkBundle.ConfirmationHeader}" message="#{prkBundle.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+            </p:commandButton>
+
+        </p:panel>
+        <ui:include src="/WEB-INF/include/confirmation.xhtml"/>
+    </h:form>
+
+</ui:composition>
