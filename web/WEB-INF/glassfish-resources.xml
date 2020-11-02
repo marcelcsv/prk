@@ -6,7 +6,7 @@
         <property name="portNumber" value="1433"/>
         <property name="databaseName" value="DIAGE"/>
         <property name="User" value="prk"/>
-        <property name="Password" value="MUDf1271940**"/>
+        <property name="Password" value="***"/>
         <property name="URL" value="jdbc:sqlserver://localhost:1433;databaseName=DIAGE"/>
         <property name="driverClass" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
     </jdbc-connection-pool>
